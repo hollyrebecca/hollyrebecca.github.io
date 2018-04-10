@@ -207,7 +207,7 @@ function draw() {
 	}
 
 	var tools = {};
-	var lineList = [];
+    var lineList = [];
 
 	tools.pen = function() {
 		var tool = this;
@@ -250,6 +250,8 @@ function draw() {
 					default:
 						throw Error("Unexpected colour detected");
 				}
+
+            lineList.length = 0;
 			}
 		};
 	};
