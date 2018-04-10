@@ -427,7 +427,7 @@ PlayState._createLevel = function() {
     this.hero = new Hero(this.game, HeroX, HeroY);
     this.game.add.existing(this.hero);
 
-    const GRAVITY = 980;  // Earth gravity
+    const GRAVITY = 100;  // Earth gravity
     this.game.physics.arcade.gravity.y = GRAVITY;
 };
 
