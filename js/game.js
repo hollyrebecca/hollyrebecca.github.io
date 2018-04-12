@@ -515,7 +515,7 @@ PlayState._onHeroVsBounce = function (hero, bounce) {
 };
 
 PlayState._updateGravity = function () {
-    this.game.physics.gravity = grav;
+    this.hero.body.gravity.y = grav;
 };
 
 function newDraw() {
