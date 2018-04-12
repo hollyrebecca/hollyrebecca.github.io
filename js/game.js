@@ -7,6 +7,7 @@ var black = 0x000000;
 var red = 0xF00000;
 var blue = 0x001eff;
 var colour = black;
+var grav = 980;
 
 // TODO: create play button which initialises the game phase
 function playStart() {
@@ -17,7 +18,7 @@ function playStart() {
     bounce = obj.bounce;
     console.log(obj);
 
-	let game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
+    let game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
     game.state.add('play', PlayState);
     game.state.add('loading', LoadingState);
     game.state.start('loading');
@@ -199,6 +200,7 @@ PlayState.create = function () {
 PlayState.update = function () {
     this._handleCollisions();
     this._handleInput();
+    this._updateGravity();
 
     if (this.hero.body.onFloor()) {
         this._onHeroVsBound();
@@ -215,9 +217,9 @@ PlayState.shutdown = function () {
 
 // TODO: write game phase using phaser. use var line = new Phaser.Line(sx, sy, ex, ey) for each line in danger, platform and bounce.
 // use var graphics = game.add.graphics(line.start.x, line.start.y)   graphics.lineStyle(width, colour, alpha) for each line
-// graphics.drawShape(line)				creates the shape on the canvas
-// graphics.beginFill(colour, alpha)	applies settings to everything drawn after this point
-// graphics.endFill()					stops the settings applied in begin fill 
+// graphics.drawShape(line)             creates the shape on the canvas
+// graphics.beginFill(colour, alpha)    applies settings to everything drawn after this point
+// graphics.endFill()                   stops the settings applied in begin fill 
 
 var ENEMY_GROUP = 0x01;
 var PLATFORM_GROUP = 0x02;
@@ -274,6 +276,7 @@ PlayState._addPlatforms = function(lines) {
     if (lines.length == 0){
         return;
     }
+    console.log(lines);
     for (i = 0; i < lines.length; i++) {
         var platformGr = this.game.make.graphics();
         platformGr.clear();
@@ -316,6 +319,7 @@ PlayState._addEnemies = function(lines) {
     if (lines.length == 0){
         return;
     }
+    console.log(lines);
     for (i = 0; i < lines.length; i++) {
         var startX = lines[i].sx;
         var startY = lines[i].sy;
@@ -371,6 +375,7 @@ PlayState._addBounces = function(lines) {
     if (lines.length == 0){
         return;
     }
+    console.log(lines);
     for (i = 0; i < lines.length; i++) {
         var platformGr = this.game.make.graphics();
         platformGr.clear();
@@ -400,9 +405,9 @@ PlayState._addBounces = function(lines) {
 };
 
 PlayState._createLevel = function() {
-	this.enemies = this.game.add.group();
-	this.platforms = this.game.add.group();
-	this.bounces = this.game.add.group();
+    this.enemies = this.game.add.group();
+    this.platforms = this.game.add.group();
+    this.bounces = this.game.add.group();
     this.bounds = this.game.add.group();
 
     this.enemies.enableBody = true;
@@ -410,16 +415,16 @@ PlayState._createLevel = function() {
     this.bounces.enableBody = true;
     this.bounds.enableBody = true;
 
-	var line = new Phaser.Line();
-	
+    var line = new Phaser.Line();
+    
 
     console.log("adding platforms");
-	this._addPlatforms(platform);
+    this._addPlatforms(platform);
     console.log("adding enemies");
-	this._addEnemies(danger);
+    this._addEnemies(danger);
     console.log(danger);
     console.log("adding bounces");
-	this._addBounces(bounce);
+    this._addBounces(bounce);
     console.log(bounce);
 
     //this._addWorldBounds();
@@ -427,7 +432,7 @@ PlayState._createLevel = function() {
     this.hero = new Hero(this.game, HeroX, HeroY);
     this.game.add.existing(this.hero);
 
-    const GRAVITY = 1200;  // Earth gravity
+    const GRAVITY = 980;  // Earth gravity
     this.game.physics.arcade.gravity.y = GRAVITY;
 };
 
@@ -509,21 +514,31 @@ PlayState._onHeroVsBounce = function (hero, bounce) {
     hero.body.velocity.y = -800;
 };
 
-PlayState._updateGravity = function (newGrav) {
-    this.game.physics.gravity = newGrav * 100;
+PlayState._updateGravity = function () {
+    this.game.physics.gravity = grav;
 };
-
 
 function newDraw() {
     window.location.replace("index.html");
-}
+};
 
 function change_gravity() {
     var newGrav = document.getElementById('Gravity Value').value;
-    PlayState._updateGravity(newGrav);
-}
+    var re = /^\d+(\.)\d+$/;
+    if (!re.exec(newGrav)) {
+        return; //TODO: show message on screen of invalid value
+    }
+    var par = parseFloat(newGrav);
+    if (par != NaN){
+        grav = newGrav * 100;
+    }
+    else
+    {
+        return; //TODO: show message on screen of invalid value
+    }  
+};
 
 
 window.onload = function () {
     playStart();
-}
+};
