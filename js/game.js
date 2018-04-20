@@ -633,19 +633,19 @@ function change_gravity() {
     console.log(gravVal);
     switch (gravVal) {
         case 1:
-            grav = 980;
-            break;
-        case 2:
             grav = 370;
             break;
+        case 2:
+            grav = 887;
+            break;
         case 3:
-            grav = 162;
+            grav = 980;
             break;
         case 4:
-            grav = 371;
+            grav = 162;
             break;
         case 5:
-            grav = 887;
+            grav = 371;
             break;
         case 6:
             grav = 2500;
