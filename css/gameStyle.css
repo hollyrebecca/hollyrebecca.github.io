@@ -1,3 +1,4 @@
+
 @charset "UTF-8"; 
 /* CSS Document */ 
   
@@ -44,7 +45,7 @@ body {
   text-decoration: none;
   display: inline-block;
   font-size: 16px; 
-  left: 737px; 
+  left: 970px; 
   top: 350px; 
   width: 139px; 
   height: 67px; 
@@ -55,8 +56,9 @@ body {
 .form {
     z-index: 10; 
     position:relative;
-  	left: 737px; 
+  	left: 970px; 
     top: 175px; 
+	width: 139px;
 }
 
 #gravity_button { 
@@ -65,7 +67,7 @@ body {
   color: white;
   width: 139px;
   height: 67px;
-  left: 737px; 
+  left: 970px; 
   top: 200px; 
   padding: 12px 20px;
   resize: none;
