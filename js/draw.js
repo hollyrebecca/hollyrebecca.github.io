@@ -181,13 +181,13 @@ function draw() {
 	}
 
 	function ev_canvas (ev) {
-		//if (ev.layerX || ev.layerX == 0) {
-		//	ev._x = ev.layerX;
-		//	ev._y = ev.layerY;
-		//} else if (ev.offsetX || ev.offsetX == 0) {
+		if (ev.layerX || ev.layerX == 0) {
+			ev._x = ev.layerX;
+			ev._y = ev.layerY;
+		} else if (ev.offsetX || ev.offsetX == 0) {
 			ev._x = ev.offsetX;
 			ev._y = ev.offsetY;
-		//}
+		}
 
 		var func = tool[ev.type];
 		if (func) {
