@@ -433,7 +433,7 @@ PlayState._addLightBounces = function(lines) {
         shapeSprite.body.mass = 2500;
         shapeSprite.body.immovable = true;
         shapeSprite.body.allowGravity = false;
-        shapeSprite.body.bounce.y = 0.8;
+        shapeSprite.body.bounce.y = 0.9;
 
         //this.game.debug.body(shapeSprite);
 
@@ -596,7 +596,7 @@ PlayState._onHeroVsBounce = function (hero, bounce) {
 
 PlayState._onHeroVsLBounce = function (hero, bounce) {
     console.log("Bounce Collision");
-    hero.body.velocity.y = -1400;
+    hero.body.velocity.y = -1600;
 };
 
 PlayState._onHeroVsDBounce = function (hero, bounce) {
