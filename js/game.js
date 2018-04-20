@@ -606,7 +606,7 @@ PlayState._onHeroVsDBounce = function (hero, bounce) {
 
 PlayState._updateGravity = function () {
     this.hero.body.gravity.y = grav;
-
+    this.game.physics.arcade.gravity.y = grav;
 };
 
 function newDraw() {
@@ -620,7 +620,7 @@ function change_gravity() {
         return; //TODO: show message on screen of invalid value
     }
     var par = parseFloat(newGrav);
-    if (par != NaN){
+     if (par != NaN){
         grav = newGrav * 100;
     }
     else
@@ -633,31 +633,31 @@ function change_gravity() {
     console.log(gravVal);
     switch (gravVal) {
         case 1:
-            grav = 370;
+            grav = 370; //Mercury is 370 
             break;
         case 2:
-            grav = 887;
+            grav = 887; //Venus is 887
             break;
         case 3:
-            grav = 980;
+            grav = 980; //Earth is 980
             break;
         case 4:
-            grav = 162;
+            grav = 162; //Moon is 162
             break;
         case 5:
-            grav = 371;
+            grav = 371; //Mars
             break;
         case 6:
-            grav = 2500;
+            grav = 2500; //Jupiter 
             break;
         case 7:
-            grav = 1044;
+            grav = 1044; //Saturn
             break;
         case 8:
-            grav = 869;
+            grav = 869; //Uranus
             break;
         case 9:
-            grav = 1115;
+            grav = 1115; //Neptune
             break;
         default:
            grav = 980;
