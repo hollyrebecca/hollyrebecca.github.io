@@ -627,7 +627,10 @@ function change_gravity() {
     {
         return; //TODO: show message on screen of invalid value
     }  */
+    console.log("change gravity");
+    console.log(newGrav);
     var gravVal = parseInt(newGrav);
+    console.log(gravVal);
     switch (gravVal) {
         case 1:
             grav = 980;
@@ -659,6 +662,7 @@ function change_gravity() {
         default:
            grav = 980;
     }
+    console.log(grav);
 };
 
 
