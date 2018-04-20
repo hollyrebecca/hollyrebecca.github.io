@@ -27,7 +27,6 @@ function play() {
     /*var dictstring = JSON.stringify(dict);
     var fs = require('JSON/temp.json');
     fs.writeFile("temp.json", dictstring);*/
-
     sessionStorage.drawContent = JSON.stringify(dict);
 
     window.location.replace("game.html");
@@ -50,13 +49,13 @@ function blue_click() {
 }
 
 
-function light_blue_click() {
+function lightblue_click() {
 	context.strokeStyle = cadetblue;
 	colour = cadetblue;
 }
 
 
-function dark_blue_click() {
+function darkblue_click() {
 	context.strokeStyle = darkblue;
 	colour = darkblue;
 }
