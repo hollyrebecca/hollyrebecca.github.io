@@ -121,7 +121,7 @@ select {
 #play_button { 
   position:absolute; 
   background:url(../images/coin_icon.png) no-repeat; 
-  left: 737px; 
+  left: 900px; 
   top: 400px; 
   width: 139px; 
   height: 67px; 
@@ -185,9 +185,9 @@ select {
 #nuke { 
   position:absolute; 
   cursor:pointer; 
-  margin-top:-30px; 
-  padding:20px 20px; 
-  right:100px; 
+  top:-30px; 
+  padding:20px 20px;
+  left:900px; 
   width: 139px; 
   height: 67px; 
   z-index:99999; 
