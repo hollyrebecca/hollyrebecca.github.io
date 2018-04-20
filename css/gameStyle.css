@@ -64,7 +64,7 @@ body {
 #gravity_button { 
   position: absolute; 
   background-color: #4CAF50;
-  color: black;
+  color: white;
   width: 139px;
   height: 67px;
   left: 970px; 
@@ -75,7 +75,7 @@ body {
 
 #gravText {
 	position: absolute;
-	color: rgba(255,255,255,1); 
+	color: black; 
 	background-colour: rgba(255,255,255,0.3);
 	left: 1120px;
 	height: 10px;
