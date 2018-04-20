@@ -606,6 +606,7 @@ PlayState._onHeroVsDBounce = function (hero, bounce) {
 
 PlayState._updateGravity = function () {
     this.hero.body.gravity.y = grav;
+
 };
 
 function newDraw() {
@@ -657,6 +658,7 @@ function change_gravity() {
             break;
         default:
            grav = 980;
+    }
 };
 
 
