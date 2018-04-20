@@ -12,6 +12,8 @@ var black = '#000000';
 var red = '#F00000';
 var blue = '#001eff';
 var white = "#FFFFFF";
+var cadetblue = "#5F9EA0";
+var darkblue = "#00008B";
 var colour = black;
 
 // TODO: create play button which initialises the game phase
