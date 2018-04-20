@@ -2,10 +2,14 @@
 var danger = [];  // red lines
 var platform = [];  // black lines
 var bounce = [];  //blue lines
+var lightbounce = [];
+var darkbounce = [];
 
 var black = 0x000000;
 var red = 0xF00000;
 var blue = 0x001eff;
+var cadetblue = 0x5F9EA0;
+var darkblue = 0x00008B;
 var colour = black;
 var grav = 980;
 
@@ -404,15 +408,85 @@ PlayState._addBounces = function(lines) {
     }
 };
 
+PlayState._addLightBounces = function(lines) {
+    if (lines.length == 0){
+        return;
+    }
+    console.log(lines);
+    for (i = 0; i < lines.length; i++) {
+        var platformGr = this.game.make.graphics();
+        platformGr.clear();
+        platformGr.lineStyle(lines[i].lw, cadetblue, 1);
+        platformGr.moveTo(lines[i].sx, lines[i].sy);
+        platformGr.lineTo(lines[i].ex, lines[i].ey);
+        platformGr.boundsPadding = 0;
+
+        var texture = platformGr.generateTexture();
+
+        platformGr.destroy();
+
+        var shapeSprite = this.game.add.sprite(lines[i].sx, lines[i].sy, texture);
+
+        this.game.physics.enable(shapeSprite, Phaser.Physics.ARCADE);
+
+        shapeSprite.enableBody = true;
+        shapeSprite.body.mass = 100;
+        shapeSprite.body.immovable = true;
+        shapeSprite.body.allowGravity = false;
+        shapeSprite.body.bounce.y = 0.8;
+
+        //this.game.debug.body(shapeSprite);
+
+        this.lbounces.add(shapeSprite);
+    }
+};
+
+PlayState._addDarkBounces = function(lines) {
+    if (lines.length == 0){
+        return;
+    }
+    console.log(lines);
+    for (i = 0; i < lines.length; i++) {
+        var platformGr = this.game.make.graphics();
+        platformGr.clear();
+        platformGr.lineStyle(lines[i].lw, darkblue, 1);
+        platformGr.moveTo(lines[i].sx, lines[i].sy);
+        platformGr.lineTo(lines[i].ex, lines[i].ey);
+        platformGr.boundsPadding = 0;
+
+        var texture = platformGr.generateTexture();
+
+        platformGr.destroy();
+
+        var shapeSprite = this.game.add.sprite(lines[i].sx, lines[i].sy, texture);
+
+        this.game.physics.enable(shapeSprite, Phaser.Physics.ARCADE);
+
+        shapeSprite.enableBody = true;
+        shapeSprite.body.mass = 100;
+        shapeSprite.body.immovable = true;
+        shapeSprite.body.allowGravity = false;
+        shapeSprite.body.bounce.y = 0.2;
+
+        //this.game.debug.body(shapeSprite);
+
+        this.dbounces.add(shapeSprite);
+    }
+};
+
 PlayState._createLevel = function() {
     this.enemies = this.game.add.group();
     this.platforms = this.game.add.group();
-    this.bounces = this.game.add.group();
+    this.bounces = this.game.add.group()
+    this.lbounces = this.game.add.group();
+    this.dbounces = this.game.add.group();
     this.bounds = this.game.add.group();
 
     this.enemies.enableBody = true;
     this.platforms.enableBody = true;
     this.bounces.enableBody = true;
+    this.lbounces.enableBody = true;
+    this.dbounces.enableBody = true;
     this.bounds.enableBody = true;
 
     var line = new Phaser.Line();
@@ -425,6 +499,8 @@ PlayState._createLevel = function() {
     console.log(danger);
     console.log("adding bounces");
     this._addBounces(bounce);
+    this._addLightBounces(bounce);
+    this._addDarkBounces(bounce);
     console.log(bounce);
 
     //this._addWorldBounds();
@@ -443,7 +519,9 @@ PlayState._handleCollisions = function () {
     this.game.physics.arcade.collide(this.hero, this.platforms);
 
     this.game.physics.arcade.collide(this.hero, this.bounces, this._onHeroVsBounce, null, this);
-
+    this.game.physics.arcade.collide(this.hero, this.lbounces, this._onHeroVsLBounce, null, this);
+    this.game.physics.arcade.collide(this.hero, this.dbounces, this._onHeroVsDBounce, null, this);
+    
     this.game.physics.arcade.collide(this.hero, this.bounds, this._onHeroVsBound, null, this);
 
     // hero vs coins (pick up)
@@ -512,6 +590,16 @@ PlayState._onHeroVsEnemy = function (hero, enemy) {
 PlayState._onHeroVsBounce = function (hero, bounce) {
     console.log("Bounce Collision");
     hero.body.velocity.y = -800;
+};
+
+PlayState._onHeroVsLBounce = function (hero, bounce) {
+    console.log("Bounce Collision");
+    hero.body.velocity.y = -1400;
+};
+
+PlayState._onHeroVsDBounce = function (hero, bounce) {
+    console.log("Bounce Collision");
+    hero.body.velocity.y = -200;
 };
 
 PlayState._updateGravity = function () {
