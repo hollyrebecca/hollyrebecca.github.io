@@ -309,7 +309,7 @@ PlayState._addPlatforms = function(lines) {
         this.game.physics.enable(shapeSprite, Phaser.Physics.ARCADE);
 
         shapeSprite.enableBody = true;
-        shapeSprite.body.mass = 2000;
+        shapeSprite.body.mass = 2500;
         shapeSprite.body.immovable = true;
         shapeSprite.body.allowGravity = false;
 
@@ -367,7 +367,7 @@ PlayState._addEnemies = function(lines) {
         shapeSprite.body.immovable = true;
         shapeSprite.body.allowGravity = false;
         shapeSprite.enableBody = true;
-        shapeSprite.body.mass = 100;
+        shapeSprite.body.mass = 2500;
 
         //this.game.debug.body(shapeSprite);
 
@@ -397,7 +397,7 @@ PlayState._addBounces = function(lines) {
         this.game.physics.enable(shapeSprite, Phaser.Physics.ARCADE);
 
         shapeSprite.enableBody = true;
-        shapeSprite.body.mass = 100;
+        shapeSprite.body.mass = 2500;
         shapeSprite.body.immovable = true;
         shapeSprite.body.allowGravity = false;
         shapeSprite.body.bounce.y = 0.5;
@@ -430,7 +430,7 @@ PlayState._addLightBounces = function(lines) {
         this.game.physics.enable(shapeSprite, Phaser.Physics.ARCADE);
 
         shapeSprite.enableBody = true;
-        shapeSprite.body.mass = 100;
+        shapeSprite.body.mass = 2500;
         shapeSprite.body.immovable = true;
         shapeSprite.body.allowGravity = false;
         shapeSprite.body.bounce.y = 0.8;
@@ -463,7 +463,7 @@ PlayState._addDarkBounces = function(lines) {
         this.game.physics.enable(shapeSprite, Phaser.Physics.ARCADE);
 
         shapeSprite.enableBody = true;
-        shapeSprite.body.mass = 100;
+        shapeSprite.body.mass = 2500;
         shapeSprite.body.immovable = true;
         shapeSprite.body.allowGravity = false;
         shapeSprite.body.bounce.y = 0.2;
@@ -614,7 +614,7 @@ function newDraw() {
 
 function change_gravity() {
     var newGrav = document.getElementById('Gravity Value').value;
-    var re = /^\d+(\.)\d+$/;
+    /*var re = /^\d+(\.)\d+$/;
     if (!re.exec(newGrav)) {
         return; //TODO: show message on screen of invalid value
     }
@@ -625,7 +625,38 @@ function change_gravity() {
     else
     {
         return; //TODO: show message on screen of invalid value
-    }  
+    }  */
+    var gravVal = parseInt(newGrav);
+    switch (gravVal) {
+        case 1:
+            grav = 980;
+            break;
+        case 2:
+            grav = 370;
+            break;
+        case 3:
+            grav = 162;
+            break;
+        case 4:
+            grav = 371;
+            break;
+        case 5:
+            grav = 887;
+            break;
+        case 6:
+            grav = 2500;
+            break;
+        case 7:
+            grav = 1044;
+            break;
+        case 8:
+            grav = 869;
+            break;
+        case 9:
+            grav = 1115;
+            break;
+        default:
+           grav = 980;
 };
 
 
