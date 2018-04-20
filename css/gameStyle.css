@@ -6,9 +6,9 @@
   
 body { 
   background:url(../images/background.png) repeat-x #f8f8f8; 
-  color:#d7d7d7; 
+  color:black; 
   font-family:"Belle","Comic Sans MS", cursive; 
-  font-size:25px; 
+  font-size:16px; 
   line-height:27px;
 } 
 
@@ -75,9 +75,10 @@ body {
 
 #gravText {
 	position: absolute;
+	color: rgba(255,255,255,1); 
 	background-colour: rgba(255,255,255,0.3);
 	left: 1120px;
 	height: 10px;
-	paddind: 12px 20px;
+	padding: 12px 20px;
 	resize: none;
 }
