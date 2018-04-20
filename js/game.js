@@ -500,9 +500,9 @@ PlayState._createLevel = function() {
     console.log("adding bounces");
     this._addBounces(bounce);
     console.log("adding lbounce");
-    this._addLightBounces(bounce);
+    this._addLightBounces(lightbounce);
     console.log("adding dbounces");
-    this._addDarkBounces(bounce);
+    this._addDarkBounces(darkbounce);
     console.log(bounce);
 
     //this._addWorldBounds();
