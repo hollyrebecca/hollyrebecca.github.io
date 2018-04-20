@@ -5,6 +5,8 @@ var context;
 var danger = [];  // red lines
 var platform = [];  // black lines
 var bounce = [];  //blue lines
+var light_bounce = [];
+var dark_bounce = [];
 
 var black = '#000000';
 var red = '#F00000';
@@ -17,7 +19,9 @@ function play() {
 	var dict = {
                 "danger" : danger,
                 "platform" : platform,
-                "bounce" : bounce
+                "bounce" : bounce,
+		"lightbounce" : light_bounce, 
+		"darkbounce" : dark_bounce
                 }
 
     /*var dictstring = JSON.stringify(dict);
@@ -43,6 +47,18 @@ function red_click() {
 function blue_click() {
 	context.strokeStyle = blue;
 	colour = blue;
+}
+
+
+function light_blue_click() {
+	context.strokeStyle = cadetblue;
+	colour = cadetblue;
+}
+
+
+function dark_blue_click() {
+	context.strokeStyle = darkblue;
+	colour = darkblue;
 }
 
 function black_click() {
@@ -128,7 +144,7 @@ function draw() {
 	function init() {
 		canvaso = document.getElementById('drawingCanvas');
 		if (!canvaso) {
-			alert('Error! THe canvas element was not found!');
+			alert('Error! The canvas element was not found!');
 			return;
 		}
 
@@ -239,13 +255,19 @@ function draw() {
 
 				switch (colour) {
 					case red: 
-                        danger = danger.concat(lineList);
-                        break
-                    case black:
-                        platform = platform.concat(lineList);
-                        break
-                    case blue:
-                        bounce = bounce.concat(lineList);
+						danger = danger.concat(lineList);
+						break
+					case black:
+						platform = platform.concat(lineList);
+						break
+					case blue:
+						bounce = bounce.concat(lineList);
+						break
+					case darkblue:
+						dark_bounce = dark_bounce.concat(lineList);
+						break
+					case cadetblue:
+						light_bounce = light_bounce.concat(lineList);
 						break
 					default:
 						throw Error("Unexpected colour detected");
@@ -292,6 +314,12 @@ function draw() {
 						break
 					case blue:
 						bounce = bounce.concat(subline);
+						break
+					case cadetblue:
+						light_bounce = light_bounce.concat(subline);
+						break
+					case darkblue:
+						dark_bounce = dark_bounce.concat(subline);
 						break
 					default:
 						throw Error("Unexpected colour detected");
