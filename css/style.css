@@ -13,7 +13,7 @@ body {
   
 #wrapper { 
   position:relative; 
-  width:990px; 
+  width:960px; 
   margin:0 auto; 
   padding-top:50px;
   padding-left: 75px;
@@ -23,14 +23,14 @@ body {
 #boardPlaceholder { 
   /*background:url(../images/background.png) no-repeat; */
   width:924px; 
-  height:625px; 
+  height:599px; 
   margin:0 auto; 
   padding:14px 0 75px 14px; 
   cursor:crosshair; 
 }
 
 #drawingCanvas { 
-  position:relative; 
+  position:absolute; 
   border:none; 
   color: rgba(255,255,255,1); 
   overflow:hidden; 
@@ -121,7 +121,7 @@ select {
 #play_button { 
   position:absolute; 
   background:url(../images/coin_icon.png) no-repeat; 
-  left: 900px; 
+  left: 970px; 
   top: 400px; 
   width: 139px; 
   height: 67px; 
@@ -185,7 +185,7 @@ select {
 #nuke { 
   position:absolute; 
   cursor:pointer; 
-  top:-30px; 
+  top:0px; 
   padding:20px 20px;
   left:900px; 
   width: 139px; 
