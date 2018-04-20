@@ -199,8 +199,6 @@ PlayState.create = function () {
 
     // TODO: Create level using drawn lines in danger, platform and bounce
     this._createLevel();
-
-    console.log(this.platforms);
 };
 
 PlayState.update = function () {
@@ -501,7 +499,9 @@ PlayState._createLevel = function() {
     console.log(danger);
     console.log("adding bounces");
     this._addBounces(bounce);
+    console.log("adding lbounce");
     this._addLightBounces(bounce);
+    console.log("adding dbounces");
     this._addDarkBounces(bounce);
     console.log(bounce);
 
