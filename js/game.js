@@ -20,6 +20,8 @@ function playStart() {
     danger = obj.danger;
     platform = obj.platform;
     bounce = obj.bounce;
+    lightbounce = obj.lightbounce;
+    darkbounce = obj.darkbounce;
     console.log(obj);
 
     let game = new Phaser.Game(960, 600, Phaser.AUTO, 'game');
