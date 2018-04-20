@@ -72,3 +72,12 @@ body {
   padding: 12px 20px;
   resize: none;
 }
+
+#gravText {
+	position: absolute;
+	background-colour: rgba(255,255,255,0.3);
+	left: 1120px;
+	height: 10px;
+	paddind: 12px 20px;
+	resize: none;
+}
