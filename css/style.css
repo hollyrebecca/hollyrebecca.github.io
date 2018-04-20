@@ -79,6 +79,22 @@ select {
   top:620px; 
   left:320px; 
 } 
+#lightBluePen_button { 
+  background-color:cadetblue;
+  cursor:pointer; 
+  position:absolute; 
+  z-index:99999; 
+  top:620px; 
+  left:400px; 
+} 
+#darkBluePen_button { 
+  background-color:darkblue;
+  cursor:pointer; 
+  position:absolute; 
+  z-index:99999; 
+  top:620px; 
+  left:480px; 
+} 
 #eraser { 
   position:absolute; 
   background:url(../images/coin_animated.png) no-repeat; 
