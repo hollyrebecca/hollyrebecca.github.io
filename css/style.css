@@ -59,22 +59,31 @@ select {
 }
 
 #redPen_button { 
+  background-color: red;
   cursor:pointer; 
-  position:absolute; 
+  position:absolute;
+  padding: 15px 32px;
+  margin: 4px 2px;
   z-index:99999; 
   top:620px; 
   left:240px; 
 } 
 #blackPen_button { 
+  background-color: black;
   cursor:pointer; 
   position:absolute; 
+  padding: 15px 32px;
+  margin: 4px 2px;
   z-index:99999; 
   top:620px; 
   left:160px; 
 } 
-#bluePen_button { 
+#bluePen_button {
+  background-color: blue;
   cursor:pointer; 
   position:absolute; 
+  padding: 15px 32px;
+  margin: 4px 2px;
   z-index:99999; 
   top:620px; 
   left:320px; 
@@ -93,6 +102,8 @@ select {
   background-color:darkblue;
   cursor:pointer; 
   position:absolute; 
+  padding: 15px 32px;
+  margin: 4px 2px;
   z-index:99999; 
   top:620px; 
   left:480px; 
