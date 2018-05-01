@@ -51,6 +51,7 @@ function Hero(game, x, y) {
     this.body.immovable = false;
 
     this.body.maxVelocity.y = 500;
+
     // animations
     this.animations.add('stop', [0]);
     this.animations.add('run', [1, 2], 8, true); // 8fps looped
@@ -170,6 +171,10 @@ LoadingState.preload = function () {
     this.game.load.image('background', 'images/background.png');
 
     this.game.load.spritesheet('hero', 'images/hero.png', 36, 42);
+
+    this.game.load.spritesheet('door', 'images/door.png', 42, 66);
+
+    this.game.load.spritesheet('e_door', 'images/enter_door.png', 42, 66);
 };
 
 LoadingState.create = function () {
@@ -296,13 +301,20 @@ PlayState._addPlatforms = function(lines) {
         var startX = lines[i].sx;
         var startY = lines[i].sy;
 
-        if (lines[i].sy > lines[i].ey) {
+        if ((lines[i].sy > lines[i].ey) && (lines[i].sx > lines[i].ex)) {
             startY = lines[i].ey;
-        }
-
-        if (lines[i].sx > lines[i].ex) {
             startX = lines[i].ex;
         }
+        else if ((lines[i].sy > lines[i].ey) && (lines[i].sx < lines[i].ex)) {
+            startY = lines[i].ey;
+        }
+        else if ((lines[i].sy < lines[i].ey) && (lines[i].sx > lines[i].ex)) {
+            startX = lines[i].ex;
+        }
+
+        //if ((lines[i].sx > lines[i].ex) && (lines[i].sy )){
+        //    startX = lines[i].ex;
+        //}
 
         var shapeSprite = this.game.add.sprite(startX, startY, texture);
 
@@ -474,7 +486,22 @@ PlayState._addDarkBounces = function(lines) {
     }
 };
 
+PlayState._spawnExitDoor = function (x, y) {
+    this.door = this.bgDecoration.create(x, y, 'door');
+    this.door.anchor.setTo(0.15, 0.85);
+    this.game.physics.enable(this.door);
+    this.door.body.allowGravity = false;
+};
+
+PlayState._spawnEnterDoor = function (x, y) {
+    this.edoor = this.bgDecoration.create(x, y, 'e_door');
+    this.edoor.anchor.setTo(0.45, 0.35);
+    this.game.physics.enable(this.edoor);
+    this.edoor.body.allowGravity = false;
+};
+
 PlayState._createLevel = function() {
+    this.bgDecoration = this.game.add.group();
     this.enemies = this.game.add.group();
     this.platforms = this.game.add.group();
     this.bounces = this.game.add.group()
@@ -491,6 +518,8 @@ PlayState._createLevel = function() {
 
     var line = new Phaser.Line();
     
+    this._spawnEnterDoor(HeroX, HeroY);
+    this._spawnExitDoor(800, 500);
 
     console.log("adding platforms");
     this._addPlatforms(platform);
@@ -506,9 +535,10 @@ PlayState._createLevel = function() {
     console.log(bounce);
 
     //this._addWorldBounds();
-
+    this.edoor.frame = 1;
     this.hero = new Hero(this.game, HeroX, HeroY);
     this.game.add.existing(this.hero);
+    this.edoor.frame = 0;
 
     const GRAVITY = 980;  // Earth gravity
     this.game.physics.arcade.gravity.y = GRAVITY;
@@ -524,7 +554,7 @@ PlayState._handleCollisions = function () {
     this.game.physics.arcade.collide(this.hero, this.lbounces, this._onHeroVsLBounce, null, this);
     this.game.physics.arcade.collide(this.hero, this.dbounces, this._onHeroVsDBounce, null, this);
     
-    this.game.physics.arcade.collide(this.hero, this.bounds, this._onHeroVsBound, null, this);
+    this.game.physics.arcade.collide(this.hero, this.bounds, this._onHeroVsEnemy, null, this);
 
     // hero vs coins (pick up)
     //this.game.physics.arcade.overlap(this.hero, this.coins, this._onHeroVsCoin,
@@ -533,7 +563,7 @@ PlayState._handleCollisions = function () {
     //this.game.physics.arcade.overlap(this.hero, this.key, this._onHeroVsKey,
         //null, this);
     // hero vs door (end level)
-    //this.game.physics.arcade.overlap(this.hero, this.door, this._onHeroVsDoor,
+    this.game.physics.arcade.overlap(this.hero, this.door, this._onHeroVsDoor, null, this);
         // ignore if there is no key or the player is on air
         //function (hero, door) {
         //    return this.hasKey && hero.body.touching.down;
@@ -543,9 +573,17 @@ PlayState._handleCollisions = function () {
         this._onHeroVsEnemy, null, this);
 };
 
-PlayState._onHeroVsBound = function () {
-    alert('You won the game, congratulations!');
-    this.game.state.restart(true, false);
+PlayState._onHeroVsDoor = function () {
+    this.door.frame = 1;
+
+    // play 'enter door' animation and change to the next level when it ends
+    this.hero.freeze();
+    this.game.add.tween(this.hero)
+        .to({x: this.door.x, alpha: 0}, 500, null, true)
+        .onComplete.addOnce(function() {
+            this.game.state.restart(true, false);
+            alert('You won the game, congratulations!');
+        } , this);
 }
 
 PlayState._handleInput = function () {
@@ -580,15 +618,12 @@ PlayState._onHeroVsEnemy = function (hero, enemy) {
     hero.events.onKilled.addOnce(function () {
         this.game.state.restart(true, false);
     }, this);
-
-    // NOTE: bug in phaser in which it modifies 'touching' when
-    // checking for overlaps. This undoes that change so enemies don't
-    // 'bounce' agains the hero
-    enemy.body.touching = enemy.body.wasTouching;
 };
 
+PlayState._onHeroVsBound = function () {
+    this._onHeroVsEnemy(this.hero, this.bounds);
+};
 
-// TODO: Congratulate on level completion
 PlayState._onHeroVsBounce = function (hero, bounce) {
     console.log("Bounce Collision");
     hero.body.velocity.y = -800;
@@ -610,7 +645,12 @@ PlayState._updateGravity = function () {
 };
 
 function newDraw() {
-    window.location.replace("index.html");
+    window.location.replace("draw.html");
+};
+
+function edit() {
+    sessionStorage.editContent = JSON.stringify(true);
+    window.location.replace("draw.html");
 };
 
 function change_gravity() {

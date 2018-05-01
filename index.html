@@ -10,55 +10,12 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.0.0/phaser.min.js"></script>
     <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.min.js"></script-->
-    <script type="text/javascript" src="js/draw.js"></script> 
 </head> 
 <body> 
-  
-    <!-- Wrapper Begins -->
-    <div id="wrapper"> 
-      
-    <div id="boardPlaceholder"> 
-      
-        <!-- Tool Selector -->
-        <p><select name="selector" id="selector"><option value="pen">Pen</option><option value="line">Line</option><option value="eraser">Eraser</option></select></p> 
-          
-        <!-- Canvas Begins -->
-        <canvas id="drawingCanvas" height="532" width="897"> <p class="noscript">We're sorry, this web application is currently not supported with your browser. Please use an alternate browser or download a supported <br />browser. Supported browsers: <a href="http://www.google.com/chrome">Google Chrome</a>, <a href="http://www.opera.com">Opera</a>, <a href="http://www.mozilla.com">Firefox</a>, <a href="http://www.apple.com/safari">Safari</a>, <br />and <a href="http://www.konqueror.org">Konqueror</a>. Also make sure your JavaScript is enabled.</p></canvas> <!-- Canvas Ends -->
-          
-        <!-- Colour Palettes -->
-        <button id="bluePen_button" width="71" height="17" onclick="javascript:blue_click()"></button>
-        <button id="lightBluePen_button" width="71" height="17" onclick="javascript:lightblue_click()"></button>
-        <button id="darkBluePen_button" width="71" height="17" onclick="javascript:darkblue_click()"></button>
-        <button id="redPen_button" width="71" height="17" onclick="javascript:red_click()"></button> 
-        <button id="blackPen_button" width="71" height="17" onclick="javascript:black_click()"></button>
 
-        <!-- Eraser -->
-        <!--div id="eraser" onclick="javascript:erase()"></div-->
-       
-    </div> 
+    <button onclick="location.href='draw.html'" title="Draw" id="draw_button">Draw</button>
 
-    <button onclick="javascript:play()" title="Play" id="play_button">Play</button>
-
-    <!-- Toggle Stroke Weight -->
-    <img src="images/minus.png" width="16" height="16" id="stroke-subtract" title="Decrease Stroke" onclick="context.lineWidth--;" /> 
-    <img src="images/plus.png" width="16" height="16" id="stroke-add" title="Increase Stroke" onclick="context.lineWidth++;" /> 
-      
-    <!-- Stroke Weight Panel -->
-    <div id="strokeWeight"> 
-    <img src="images/thin.png" alt="1.0" class="stroke" width="30" height="32" onclick="context.lineWidth = '1.0';" /> 
-    <img src="images/medium.png" alt="6.0" class="stroke" width="30" height="32" onclick="context.lineWidth = '6.0';" /> 
-    <img src="images/thick.png" alt="9.0" class="stroke" width="30" height="32" onclick="context.lineWidth = '9.0';" /> 
-    <img src="images/thickest.png" alt="13.0" class="stroke" width="30" height="32" onclick="context.lineWidth = '13.0';" /> 
-    </div>
-
-    <!-- Clear Canvas Button -->
-    <div id="nuke" title="Clear Canvas"> 
-        <button onclick="javascript:location.reload(true)" title="Clear" id="clear_button">Clear</button>
-    </div>
-
-    </div> 
-
-
+    <button onclick="" title="Help" id="help_button">Help</button>
 
 </body>
 </html>
