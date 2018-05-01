@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" /> 
+    <!-- External CSS Document(s) -->
+    <link rel="stylesheet" type="text/css" href="css/helpStyle.css" /> 
+    <title>Drawing Game</title> 
+    <!-- Eternal JavaScript Document(s) -->
+    <!--script src="//cdn.jsdelivr.net/npm/phaser@3.1.2/dist/phaser.min.js"></script-->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/phaser/2.0.3/phaser.min.js"></script>
+    <!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/Box2dWeb-2.1.a.3.min.js"></script-->
+</head> 
+<body>  
+    <div id="game"></div> 
+
+    <img src="images/home.png" width="20" height="20" id="home_button" title="Home" onclick="location.href='index.html'" />
+
+    <img src="images/helpDrawScreen.png" width="618" height="298" id="draw_image" title="Draw"/>
+
+    <img src="images/helpGameScreen.png" width="618" height="285" id="game_image" title="Game"/>
+
+    <div id="drawText">
+        <ol>
+            <li> Home Button: Click to return to the home screen. </li>
+            <li> Tools: Pick between pen, line and eraser for drawing on the shaded area of the screen. </li>
+            <li> Clear button: Clear the screen and start over. </li>
+            <li> Line width: Use these buttons to change the width of the drawing pen/line.</li>
+            <li> Entrance Door: Your game character will spawn here. Make sure to draw something to catch him. </li>
+            <li> Exit Door: Reach this door to win the game. </li>
+            <li> Red: Draw with this to create dangerous objects. </li>
+            <li> Black: Draw with this to create platforms (objects that don't move).</li>
+            <li> Pale blue: Draw with this to create very bouncy platforms - high elasticity.</li>
+            <li> Blue: Draw with this to create bouncy platforms - medium elasticity.</li>
+            <li> Dark blue: Draw with this to create slightly bouncy platforms - low elasticity.</li>
+            <li> Play Button: Click this to play your game.</li>
+        </ol>
+    </div>
+
+    <div id="gameText">
+        <ol>
+            <li> Home Button: Click to return to the home screen. </li>
+            <li> Entrance Door: Your game character will spawn here. Make sure to draw something to catch him. </li>
+            <li> Exit Door: Reach this door to win the game. </li>
+            <li> Go Button: Input a gravity option from the list of gravity levels and press go to change the level of gravity in the game. </li>
+            <li> Edit button: Click to edit your current game level.</li>
+            <li> New button: Click to create a new game level.</li>
+        </ol>
+    </div>
+
+</body>
+</html>
